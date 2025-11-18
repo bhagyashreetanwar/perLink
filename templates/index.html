@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerLink | Personal LinkedIn Post Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+    <header class="hero">
+        <nav class="nav-bar">
+            <div class="brand">{{ project_name }}</div>
+            <div class="nav-links">
+                <a href="#generator">Generator</a>
+                <a href="#contact">Contact</a>
+                <a class="cta" href="#generator">Launch Studio</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="eyebrow">Precision for LinkedIn storytellers</p>
+                <h1>Design thoughtful posts that still feel <span>personal</span>.</h1>
+                <p class="lead">{{ project_name }} studies your historic performance and recreates the rhythm, tone, and structure of your winning updates with a single click.</p>
+                <div class="hero-actions">
+                    <a href="#generator" class="btn primary">Generate a Post</a>
+                    <a href="#contact" class="btn ghost">Talk to us</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <p class="card-label">Live Preview</p>
+                <div class="card-body">
+                    <p class="card-title">Focused momentum</p>
+                    <p class="card-text">Blend Hinglish anecdotes, honest lessons, and data-backed proof to spark thoughtful discussion without losing your voice.</p>
+                </div>
+                <div class="card-meta">
+                    <span>Style match</span>
+                    <strong>98%</strong>
+                </div>
+            </div>
+        </div>
+        <div class="shape shape-one"></div>
+        <div class="shape shape-two"></div>
+        <div class="shape shape-three"></div>
+    </header>
+
+    <main>
+        <section id="generator" class="generator">
+            <div class="section-header">
+                <p class="eyebrow">Generator</p>
+                <h2>Guide {{ project_name }} with your context.</h2>
+                <p>Select a tag, length, and language. Add a dash of inspiration and click generate to recreate your signature tone.</p>
+            </div>
+            <div class="generator-grid">
+                <form id="post-form" class="panel" autocomplete="off">
+                    <div class="form-group">
+                        <label for="tag">Topic</label>
+                        <select id="tag" name="tag" required>
+                            <option value="" disabled selected>Select a topic</option>
+                            {% for tag in tags %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="length">Length</label>
+                            <select id="length" name="length" required>
+                                {% for length in lengths %}
+                                <option value="{{ length }}">{{ length }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select id="language" name="language" required>
+                                {% for language in languages %}
+                                <option value="{{ language }}">{{ language }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="status" id="status"></div>
+                    <button type="submit" class="btn primary full">Generate LinkedIn Post</button>
+                </form>
+                <div class="panel output">
+                    <div class="output-header">
+                        <p class="eyebrow">Generated Post</p>
+                        <button id="copy-btn" type="button" class="btn ghost small">Copy</button>
+                    </div>
+                    <article id="result" class="result">
+                        <p class="placeholder">Your crafted copy will appear here.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="contact-info">
+                <p class="eyebrow">Contact</p>
+                <h2>Partner with {{ project_name }}.</h2>
+                <p>Need onboarding support, want to collaborate, or just curious about the roadmap? We respond within one business day.</p>
+                <ul>
+                    <li><span>Email</span> hello@perlink.ai</li>
+                    <li><span>Slack</span> perlink-community</li>
+                    <li><span>Office</span> Mumbai · Remote-friendly</li>
+                </ul>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" placeholder="Aanya Desai">
+                <label for="email">Work email</label>
+                <input type="email" id="email" name="email" placeholder="aanya@perlink.ai">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Tell us about your LinkedIn goals."></textarea>
+                <button type="submit" class="btn primary full">Request a Callback</button>
+                <p class="form-note" id="contact-status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© {{ project_name }} · LinkedIn storytelling, personalized.</p>
+    </footer>
+</body>
+</html>
